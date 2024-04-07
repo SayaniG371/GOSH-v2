@@ -61,8 +61,12 @@ class CSR
     int alias_table_imp = 0;
     CSR(ll nv, ll ne, T *V, T *E, T *W = NULL, T *map = NULL);
     CSR(CSR &); 
-    CSR(string fname, int ati = 0);
-    CSR(string fname, bool directed, bool weighted, bool binary = false, int ati=0);
+    template <class T>
+    class CSR {
+    public:
+      CSR(string fname, int ati = 0);
+      CSR(string fname, bool directed, bool weighted, bool binary = false, int ati=0);
+    };
     ~CSR(); 
     bool is_weighted() const;  
     T get_correct_edge_index(T v, T * edge_place);
