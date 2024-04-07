@@ -73,12 +73,12 @@ template <class T>
 CSR<T>::CSR(ll nv, ll ne, T *v, T *e, T *w, T *map) : num_edges(ne), num_vertices(nv), E(e), V(v), W(w), map(map)
 {
   sizeOfUnit = sizeof(T);
-    if (alias_table_imp ==0){
+  if (alias_table_imp == 0) {
     construct_ps_alias_table_gv();
     construct_ns_alias_table_gv(0.75);
-  } else {
+} else {
     construct_alias_table_line();
-  }
+}
 }
 
 template <class T>
@@ -91,12 +91,12 @@ CSR<T>::CSR(string fname, int ati): alias_table_imp(ati)
     cout << "Failed to read CSR from bcsr file.\n";
     throw 1;
   }
-   if (alias_table_imp == 0){  
+   if (alias_table_imp == 0) {  
     construct_ps_alias_table_gv();
     construct_ns_alias_table_gv(0.75);
-  } else {
+} else {
     construct_alias_table_line();
-  }
+}
 }
 
 template <class T>
@@ -152,22 +152,19 @@ CSR<T>::CSR(CSR &copy) : num_edges(copy.num_edges), num_vertices(copy.num_vertic
   if (copy.W != NULL)
     for (unsigned long long i = 0; i < num_edges; i++)
       W[i] = copy.W[i];
-  v_alias.size = copy.v_alias.size;
-  v_alias.alias_p = new float[copy.v_alias.size];
-  v_alias.alias_v = new T[copy.v_alias.size];
-  for (int i = 0; i < copy.v_alias.size; i++)
-  {
+v_alias.size = copy.v_alias.size;
+v_alias.alias_p = new float[copy.v_alias.size];
+v_alias.alias_v = new T[copy.v_alias.size];
+for (int i = 0; i < copy.v_alias.size; i++) {
     v_alias.alias_p[i] = copy.alias_p[i];
     v_alias.alias_v[i] = copy.alias_v[i];
-  }
-  ns_alias.size = copy.size;
-  ns_alias.alias_p = new float[copy.ns_alias.size];
-  ns_alias.alias_v = new T[copy.ns_alias.size];
-  for (int i = 0; i < copy.ns_alias.size; i++)
-  {
+}
+ns_alias.size = copy.size;
+ns_alias.alias_p = new float[copy.ns_alias.size];
+ns_alias.alias_v = new T[copy.ns_alias.size];
+for (int i = 0; i < copy.ns_alias.size; i++) {
     ns_alias.alias_p[i] = copy.alias_p[i];
     ns_alias.alias_v[i] = copy.alias_v[i];
-  }
 }
 
 template <class T>
